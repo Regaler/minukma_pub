@@ -2,6 +2,23 @@
 
 This is a Flask-powered personal website hosted on an Amazon EC2 instance. It uses SQLite3 as a database to store data, including blog posts and replies from users. It was primarily designed to serve as a platform to showcase my research work and connect with my peers and the general audience.
 
+## I'm new to this repo
+```
+git clone https://github.com/Regaler/minukma_pub.git
+flask db init  # This will create a new migrations folder in your project directory
+flask db migrate -m "Initial migration"  # This will generate an initial migration script
+flask db upgrade  # This will apply the migration to the database
+flask run
+```
+and observe through the browser. Then, feed in some information
+```
+python seed_admin.py  # change the password here and save it securely
+python seed_blogs.py
+python seed_research_highlights.py
+```
+and observe through the browser. 
+
+
 ## Technologies Used
 
 - Flask
