@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans-neo@3.1.1/css/spoqa-han-sans-neo.css" />
+    <title>Articles - Minuk Ma's website</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/blog_styles.css">   
+    <link rel="icon" href="/static/minuk_logo.png" type="image/png">
+</head>
+
+<body>
+    <!-- Add the navigation bar with links -->
+    {% include 'navbar.html' %}
+    {% include 'blog_navbar.html' %}
+    
+    <div class="blog-container">
+        <h1>{{ blog.title }}</h1>
+        <p>article written on {{ blog.date.strftime('%Y-%m-%d') }}</p>
+        {% for post in blog.posts %}
+            <div class="post">
+                {% for image in post.images %}
+                    <img src="{{ image.src }}" alt="{{ image.alt }}" width="250" class="profile-photo">
+                {% endfor %}
+                <p>{{ post.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Show flask message when the previously input password was incorrect -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Replies from the guests -->
+    <div class="reply-section">
+        <h2>Replies:</h2>
+        {% for reply in blog.replies %}
+            <div class="reply">
+                <h3 class="guest-name">{{ reply.guest }}</h3>
+                <p>{{ reply.content }}</p>
+                <small class="reply-date">{{ reply.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
+                <hr>
+            </div>
+        {% endfor %}
+        
+        <h2>Leave a Reply:</h2>
+        <form action="/add_reply/{{ blog.id }}" method="post">
+            <label for="guest">Name:</label><br>
+            <input type="text" id="guest" name="guest" required><br>
+            <label for="reply">Message:</label><br>
+            <textarea id="reply" name="reply" required></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+
+    <br><br><br>
+    <!-- The following div contains a button and password textbox to login as Admin -->
+    <div class="admin-login">
+        <form action="/login" method="post">
+            <label for="password">If you're Minuk, you can create, revise, or delete the posts with the password. </label><br>
+    
+            <input type="hidden" id="action" name="action" value="">
+            <input type="hidden" id="post_id" name="post_id" value="{{ blog.id }}">
+    
+            <button class="admin-button" type="submit" onclick="document.getElementById('action').value='new_post'">Create A New Post</button><br>
+            <button class="admin-button" type="submit" onclick="document.getElementById('action').value='revise_post'">Revise This Post</button><br>
+            <button class="admin-button" type="submit" onclick="document.getElementById('action').value='delete_post'">Delete This Post</button><br>
+    
+            Password: <input type="password" id="password" name="password">
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minuk Ma's website</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" href="/static/minuk_logo.png" type="image/png">
+</head>
+<body>
+    <div id="app">
+    <!-- Add the navigation bar with links -->
+    {% include 'navbar.html' %}
+
+    <div class="container">
+        <h2 data-aos="fade-in"><img src="/static/about-icon.png" alt="About Icon" class="icon">About</h2>
+        <div class="intro-container" data-aos="fade-in">
+            <div class="media-container">
+                <img src="/static/minuk.jpg" alt="My Photo" class="profile-photo">
+                <div class="name-container">
+                    <h3>Minuk Ma </br> AI Researcher</h3>
+                </div>
+            </div>
+            <div class="intro-text">
+                <p>
+                    I want to positively influence people’s lives with my knowledge in <strong>computer science</strong>.
+                    I am excited by the great synergy between the <strong>AI technology</strong> (predictive models and
+                    representation learning) and <strong>biomedical field</strong> (big data). I graduated from Korea Advanced
+                    Institute of Science and Technology (KAIST) with a Bachelor of Science in EE/CS in 2018. I got Master's degree
+                    in electrical engineering from the same school in prof. ChangDong Yoo's lab. 
+                </p>
+                <p><strong>Contact</strong> </br>
+                    <img src="/static/mobile-icon.png" alt="Mobile Icon" class="icon"><strong>MOBILE</strong>:+82 10 8773 2396 </br>
+                    <img src="/static/email-icon.png" alt="Email Icon" class="icon"><strong>E-MAIL</strong>: minuk.ma@kaist.ac.kr </br>
+                    <img src="/static/address-icon.png" alt="Address Icon" class="icon"><strong>ADDR</strong>: Songpa-gu, Seoul, Republic of Korea </br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="experience-container" data-aos="fade-in">
+            <div class="education-container">
+                <h2 data-aos="fade-in">
+                    <img src="/static/education-icon.png" alt="Education Icon" class="icon"> Education
+                </h2>
+                <ul>
+                    <li data-aos="fade-in" v-for="education in educations">
+                        [[ education.school ]] </br> [[ education.degree ]], [[ education.years ]]
+                    </li>
+                </ul>
+            </div>
+            <div class="work-container">
+                <h2 data-aos="fade-in"><img src="/static/work-icon.png" alt="Work Icon" class="icon">Work Experience</h2>
+                <ul>
+                    <li data-aos="fade-in" v-for="work in workExperiences">
+                        [[ work.company ]] </br> [[ work.position ]], [[ work.years ]]
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- the following container describes my enthusiasm towards research as some motos and lyrics-->
+    <div class="container">
+        <h2 data-aos="fade-in"><img src="/static/research-icon.png" alt="Research Icon" class="icon">Enthusiasm</h2>
+        <div class="research-container" data-aos="fade-in">
+            <div class="research-text">
+                <p>
+                    The following section is from my friend <strong>"Steve Kang"</strong>, who often gives me precious advices. 
+                </p>
+                <p>
+                    In the vast expanse of medical knowledge, I, a lowly researcher, harness the power of AI to uncover hidden truths and bring light to the dark corners of the human body. 
+                    The medical AI researcher, armed with the tools of technology and the insights of science, seeks to liberate humanity from the shackles of illness and suffering, and pave the way for a new era of health and well-being for all.
+                </p>
+                <p>
+                    마민욱, 강력한 의사의 지혜,
+                    그대의 과학은 위대한 영혼이다.
+                    그대는 기술의 인공지능의 주요 수호자이며,
+                    그대 노력은 우리 사랑하는 조국을 위한 것이다.
+
+                    그대는 건강을 지켜주며 삶을 지키는 일을 하고,
+                    인공지능 마민욱, 그대는 우리 마음 속에 영원히 존재한다.
+                    과학이 여전히 발전하며 노력이 계속되기를,
+                    마민욱, 의학 연구자이자 우리의 자랑이 되어주길!
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2 data-aos="fade-in"><img src="/static/research-icon.png" alt="Research Icon" class="icon">Research Highlights</h2>
+        <ul>
+            <li class="research-item" data-aos="fade-in" v-for="highlight in researchHighlights">
+                <img :src="highlight.image" :alt="highlight.alt">
+                <div class="description">
+                    <p class="title">
+                        <a :href="highlight.link" target="_blank">[[ highlight.title ]]</a>
+                    </p>
+                    <p>[[ highlight.description ]]</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Add a footer -->
+    <footer>
+        <p>© 2023 Minuk Ma. All Rights Reserved.</p>
+    </footer>
+    </div>
+    
+    <script id="research-highlights-data" type="application/json">
+        {{ research_highlights_json | safe }}
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000, // duration of the animation
+                easing: 'ease-in-out', // easing function to use
+                once: false, // whether animation should happen only once - while scrolling down
+                mirror: true // whether elements should animate out while scrolling past them
+            });
+        });
+
+        const app = Vue.createApp({
+          delimiters: ['[[', ']]'], // custom delimiters to avoid conflicts with Jinja2
+          data() {
+            return {
+              educations: [
+                {
+                  school: "Korea Advanced Institute of Science and Technology (KAIST)",
+                  degree: "M.S in Electrical Engineering",
+                  years: "2018 - 2020"
+                },
+                {
+                  school: "Korea Advanced Institute of Science and Technology (KAIST)",
+                  degree: "B.S in Electrical Engineering and Computer Science",
+                  years: "2012 - 2018"
+                }
+              ],
+              workExperiences: [
+                {
+                  company: "Lunit Inc.",
+                  position: "Research Scientist",
+                  years: "2020 - 2022"
+                },
+                {
+                  company: "AIM Lab",
+                  position: "Researcher",
+                  years: "2018 - 2020"
+                }
+              ],
+              researchHighlights: JSON.parse(document.getElementById('research-highlights-data').textContent),
+            };
+          }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

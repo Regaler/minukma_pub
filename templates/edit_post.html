@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Create New Post</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/blog_styles.css">
+</head>
+<body>
+    <!-- Add the navigation bar with links -->
+    {% include 'navbar.html' %}
+    {% include 'blog_navbar.html' %}
+    
+    <div class="new-post-container" id="app">
+        <h1>Edit Post</h1>
+        <form action="{{ url_for('update_post', post_id=blog_post.id) }}" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" value="{{ blog_post.title }}" required><br>
+            
+            {% for post in blog_post.posts %}
+            <div>
+                <label for="content_{{ loop.index }}">Content:</label><br>
+                <textarea id="content_{{ loop.index }}" name="content[]">{{ post.content }}</textarea><br>
+                <label for="image_{{ loop.index }}">Image:</label><br>
+                <input type="file" id="image_{{ loop.index }}" name="image[]"><br>
+            </div>
+            {% endfor %}
+            <button type="button" @click="addParagraph">Add Paragraph</button><br>
+            <input type="submit" value="Update">
+        </form>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    paragraphs: [{}]
+                }
+            },
+            methods: {
+                addParagraph() {
+                    this.paragraphs.push({});
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Create New Post</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/blog_styles.css">
+</head>
+<body>
+    <!-- Add the navigation bar with links -->
+    {% include 'navbar.html' %}
+    {% include 'blog_navbar.html' %}
+    
+    <div class="new-post-container" id="app">
+        <h1>Create New Post</h1>
+        <form action="/create_post" method="post" enctype="multipart/form-data">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br>
+            
+            <div v-for="(paragraph, index) in paragraphs" :key="index">
+                <label :for="'content_' + index">Content:</label><br>
+                <textarea :id="'content_' + index" name="content[]"></textarea><br>
+                <label :for="'image_' + index">Image:</label><br>
+                <input type="file" :id="'image_' + index" name="image[]"><br>
+            </div>
+            <button type="button" @click="addParagraph">Add Paragraph</button><br>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    paragraphs: [{}]
+                }
+            },
+            methods: {
+                addParagraph() {
+                    this.paragraphs.push({});
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+</body>
+</html>

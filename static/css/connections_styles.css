@@ -1,0 +1,68 @@
+.connections-container {
+    padding: 20px;
+}
+
+.profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.profile {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile h2 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile p {
+    margin: 0;
+}
+
+.links a {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-friend {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.add-friend h2 {
+    margin-bottom: 10px;
+}
+
+.add-friend input[type="text"],
+.add-friend textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.add-friend input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-friend input[type="submit"]:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,10 @@
+<ul class="blog-navbar">
+    <li class="blog-dropdown">
+        <a href="javascript:void(0)" class="blog-dropdown-btn">Blog Posts &#x25BC;</a>
+        <div class="blog-dropdown-content">
+            {% for blog_post in blog_posts %}
+            <a href="/blogs/{{ blog_post.id }}">{{ blog_post.title }}</a>
+            {% endfor %}
+        </div>
+    </li>
+</ul>

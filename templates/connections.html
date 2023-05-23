@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections - Minuk Ma's website</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/connections_styles.css">
+    <link rel="icon" href="/static/minuk_logo.png" type="image/png">
+</head>
+<body>
+    <!-- Add the navigation bar with links -->
+    {% include 'navbar.html' %}
+
+    <div class="connections-container">
+        <h1>Research Collaborators and Blog Neighbors</h1>
+        <div class="profiles">
+            {% for friend in friends %}
+                <div class="profile">
+                    <img src="{{ friend.profile_photo }}" alt="{{ friend.name }}" class="profile-photo">
+                    <h2>{{ friend.name }}</h2>
+                    <p>{{ friend.description|convert_links|safe}}</p>
+                </div>
+            {% endfor %}
+        </div>        
+
+        <!-- Button to add a new friend -->
+        <div class="add-friend">
+            <h2>Add a New Connection</h2>
+            <form action="/add_friend" method="post" enctype="multipart/form-data">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="photo">Profile Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required><br>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea><br>
+                <input type="submit" value="Add Connection">
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
