@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 
 admin_data = {
     'username': 'minuk',
-    'password': ''  # I deleted it for security reasons.
+    'password': 'password'  # I deleted it for security reasons.
 }
 
 def seed_admin():
