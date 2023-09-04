@@ -1,6 +1,6 @@
 # [Minuk's Personal Website](https://www.minukma.com/)
 
-This is a Flask-powered personal website hosted on an Amazon EC2 instance. It uses SQLite3 as a database to store data, including blog posts and replies from users. It was primarily designed to serve as a platform to showcase my research work and connect with my peers and the general audience.
+This is a Flask-powered personal website hosted on an Amazon EC2 instance. It uses SQLite3 as a database to store data, including blog posts and replies from users. 
 
 ## I'm new to this repo
 ```
@@ -75,7 +75,7 @@ The website is currently set up for personal use and as such, does not support u
 
 ## License
 
-All Rights Reserved to Minuk Ma. 
+This software is licensed for unrestricted use in any context.
 
 ## Acknowledgments
 
